@@ -33,7 +33,7 @@ app.get('/metric', function(req, res) {
           repo = repos[index];
           // busco la temperatura de cada repo
           console.log("fecha de creacion: " + repo);
-          var temp = await worldweatherService.getTemperature("CABA", new Date(repo.created_at));
+          var temp = await worldweatherService.getTemperature(user.locate, new Date(repo.created_at));
           temp = temp.data.weather[0];
           var avgDay = (parseFloat(temp.maxtempC) + parseFloat(temp.mintempC))/2;
           //acumulo todas las temperaturas en un array
