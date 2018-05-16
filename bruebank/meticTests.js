@@ -12,21 +12,22 @@ describe('loading express', function () {
   afterEach(function () {
     server.close();
   });
-  it('responds to /metric', function testSlash(done) {
+  it('responds to /metric?name=damianwajser', function testSlash(done) {
     chai.request(server)
-    .get('/')
+    .get('/metric?name=damianwajser')
     .end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('object');
-      res.body.length.should.be.eql(0);
     done();
   });
+});
+  it('responds to /metric', function testSlash(done) {
+    chai.request(server)
+    .get('/metric')
+    .end((err, res) => {
+      res.should.have.status(400);
+      res.body.should.be.a('object');
+    done();
   });
-  it('404 everything else', function testPath(done) {
-    request(server)
-      .get('/foo/bar').end((err, res) => {
-        res.should.have.status(404);
-      done();
-    });
   });
 });

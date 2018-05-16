@@ -18,12 +18,13 @@ app.get('/metric', function(req, res) {
   var i=0;
   var name = req.query.name;
   if(!name){
-    res.jsonp(400, {msj:"nombre requerido"});
+    return res.status(400).json({msj:"nombre requerido"});
+    
   }
   // busco la info del usuario
   githubService.getUserInfo(name, (err,user)=>{
     if(!err){
-      console.log(user);
+      console.log("Se encontro al usuario: ", user);
       let location = user.location;
       // busco los repos
       githubService.getRepos(name, async (err, repos)=>{
@@ -38,7 +39,7 @@ app.get('/metric', function(req, res) {
           //acumulo todas las temperaturas en un array
           temps.push(avgDay);
         }  
-        res.jsonp(getResponseAvgTemp(temps));
+        return res.status(200).json(getResponseAvgTemp(temps));
       });
     }
   });
