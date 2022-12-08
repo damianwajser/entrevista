@@ -2,7 +2,7 @@
  "name": "node-brue-bank",
  "version": "2.0.0",
  "dependencies": {
-  "express": "^4.7.1",
+  "express": "^4.17.3",
   "method-override": "^2.1.2",
   "body-parser": "^1.5.1"
  },
